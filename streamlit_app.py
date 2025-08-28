@@ -297,8 +297,8 @@ if page == "Overview":
         
         st.markdown("""
         <div class="highlight-box">
-            <p><strong>💡 Simple Example:</strong> When a patient opens an appointment reminder text, 
-            that data flows to Snowflake where AFC can analyze patterns and improve care.</p>
+            <p><strong>💡 AFC Example:</strong> Patient with high BP gets 90-day check reminder → 
+            Braze tracks if they respond → Data flows back to Snowflake → AFC optimizes BP monitoring campaigns.</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -307,9 +307,9 @@ if page == "Overview":
         <div class="integration-card">
             <h3>📊 What AFC Gets</h3>
             <ul>
-                <li>📱 <strong>Track patient responses</strong> to messages in real-time</li>
-                <li>📈 <strong>See the full picture</strong> of patient communication</li>
-                <li>⚡ <strong>Automate appointment</strong> and health reminders</li>
+                <li>🩺 <strong>Track BP monitoring</strong> every 90 days automatically</li>
+                <li>🏥 <strong>Monitor time since last visit</strong> for all patients</li>
+                <li>💊 <strong>Automate prescription refill</strong> reminders with 120-day testing</li>
                 <li>🔒 <strong>Keep patient data secure</strong> and HIPAA-compliant</li>
             </ul>
         </div>
@@ -320,28 +320,28 @@ elif page == "Integration Benefits":
     
     benefits = [
         {
-            "title": "🔄 Automatic Data Updates",
-            "description": "Patient interaction data flows automatically from Braze to Snowflake - no manual work needed."
+            "title": "🩺 Automated BP Monitoring",
+            "description": "Automatically track high blood pressure patients and send 90-day check reminders without manual tracking."
         },
         {
-            "title": "📱 See All Patient Communications", 
-            "description": "Track how patients respond to texts, emails, app notifications, and more in one place."
+            "title": "🏥 Visit Gap Identification", 
+            "description": "Instantly see which patients haven't visited the clinic recently and trigger appropriate outreach campaigns."
         },
         {
-            "title": "🔒 Keep Data Safe & Legal",
-            "description": "All patient data stays secure and follows HIPAA rules - no copying or moving sensitive information."
+            "title": "💊 Smart Prescription Management",
+            "description": "Automate prescription refill reminders with 120-day testing alerts through lifecycle canvas campaigns."
         },
         {
-            "title": "💰 Save Storage Costs",
-            "description": "Data sharing means no extra storage fees - AFC accesses Braze data directly in Snowflake."
+            "title": "📊 Complete Health Journey View",
+            "description": "Combine visit history, BP readings, and prescription data with patient engagement for complete care insights."
         },
         {
-            "title": "📊 Connect All Your Data",
-            "description": "Combine patient messaging data with appointment, billing, and care data for the complete picture."
+            "title": "🔒 HIPAA-Compliant Health Data",
+            "description": "All patient health data stays secure and follows healthcare regulations with zero-copy data sharing."
         },
         {
-            "title": "🎯 Send Better Messages",
-            "description": "Use patient behavior insights to send more effective appointment reminders and health tips."
+            "title": "🎯 Optimized Health Campaigns",
+            "description": "Use engagement data to improve BP monitoring campaigns, visit reminders, and medication compliance."
         }
     ]
     
@@ -468,33 +468,33 @@ elif page == "Data Schema Explorer":
                 }
             )
         
-        # Healthcare use cases for this table
-        st.markdown("### 🏥 Healthcare Use Cases")
+        # AFC-specific healthcare use cases
+        st.markdown("### 🏥 AFC Healthcare Use Cases")
         healthcare_use_cases = {
             "USERS_BEHAVIORS_APP_FIRSTSESSION_SHARED": [
-                "Track new patient onboarding completion rates",
-                "Analyze patient app adoption by demographics",
-                "Optimize first-visit experience workflows"
+                "Track new patients setting up health monitoring",
+                "Identify patients who need help with BP tracking app",
+                "Monitor patient onboarding for visit scheduling"
             ],
             "USERS_BEHAVIORS_CUSTOMEVENT_SHARED": [
-                "Monitor appointment booking behaviors",
-                "Track health survey completion rates", 
-                "Analyze symptom checker usage patterns"
+                "Monitor BP check appointment bookings",
+                "Track prescription refill request behaviors", 
+                "Analyze overdue visit patient actions"
             ],
             "USERS_MESSAGES_EMAIL_SEND_SHARED": [
-                "Monitor appointment reminder delivery",
-                "Track health education email campaigns",
-                "Analyze patient communication preferences"
+                "Monitor 90-day BP check reminder delivery",
+                "Track 120-day prescription testing email campaigns",
+                "Analyze overdue clinic visit email outreach"
             ],
             "USERS_MESSAGES_SMS_SEND_SHARED": [
-                "Ensure critical health alerts reach patients",
-                "Monitor urgent care visit reminders",
-                "Track prescription pickup notifications"
+                "Ensure critical BP alerts reach high-risk patients",
+                "Monitor urgent overdue visit reminders",
+                "Track prescription refill SMS notifications"
             ],
             "USERS_MESSAGES_EMAIL_OPEN_SHARED": [
-                "Measure health education content engagement",
-                "Optimize appointment reminder timing",
-                "Track preventive care campaign effectiveness"
+                "Measure BP monitoring campaign engagement",
+                "Optimize timing for prescription refill reminders",
+                "Track overdue visit outreach effectiveness"
             ]
         }
         
@@ -503,327 +503,177 @@ elif page == "Data Schema Explorer":
                 st.markdown(f"• {use_case}")
 
 elif page == "Snowflake CDI Setup":
-    st.markdown("## ❄️ Snowflake CDI Setup Guide")
+    st.markdown("## ❄️ Braze Cloud Data Ingestion Setup")
     
     st.markdown("""
     <div class="integration-card">
-        <h3>🔧 Complete Cloud Data Integration Setup</h3>
-        <p>Follow these step-by-step instructions to configure Braze data sharing with Snowflake for American Family Care's patient engagement analytics.</p>
+        <h3>🔧 Braze Cloud Data Ingestion for AFC</h3>
+        <p>Set up automated patient data sync from Braze to your Snowflake warehouse following the standard Braze CDI workflow.</p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Setup progress tracker
-    setup_steps = [
-        "Prerequisites & Account Setup",
-        "Snowflake Environment Configuration", 
-        "Braze Data Share Configuration",
-        "Database & Schema Creation",
-        "Access Control & Security",
-        "Data Validation & Testing"
-    ]
+    # CDI Workflow Overview
+    st.markdown("### 🔄 CDI Workflow Overview")
     
-    st.markdown("### 📋 Setup Steps Overview")
-    progress_cols = st.columns(len(setup_steps))
-    for i, step in enumerate(setup_steps):
-        with progress_cols[i]:
-            st.markdown(f"""
-            <div class="step-box">
-                <strong>{i+1}.</strong><br>
-                {step}
-            </div>
-            """, unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 1, 1])
+    
+    with col1:
+        st.markdown("""
+        <div class="step-box">
+            <strong>1. 📊 Snowflake Tables</strong><br>
+            Your existing Snowflake data tables
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div class="step-box">
+            <strong>2. 🔄 Braze Sync</strong><br>
+            Import patient data to Braze
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div class="step-box">
+            <strong>3. 📤 Data Export</strong><br>
+            Enhanced data back to Snowflake
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown("---")
     
-    # Step 1: Prerequisites
-    with st.expander("🔧 **Step 1: Prerequisites & Account Setup**", expanded=True):
+    # Step 1: Your Snowflake Tables
+    with st.expander("📊 **Step 1: Your Existing Snowflake Tables**", expanded=True):
+        st.markdown("#### 🗄️ AFC Patient Data in Snowflake")
+        
+        # Sample table showing existing AFC data focused on key use cases
+        sample_data = {
+            "Table Name": ["PATIENTS", "CLINIC_VISITS", "BLOOD_PRESSURE_READINGS", "PRESCRIPTION_REFILLS"],
+            "Description": ["Patient demographics & contact info", "Clinic visit history & time tracking", "BP monitoring & 90-day follow-ups", "Prescription refills & 120-day testing"],
+            "Key Fields": ["patient_id, email, phone, last_clinic_visit", "visit_id, patient_id, visit_date, days_since_last", "patient_id, bp_reading, reading_date, next_check_due", "patient_id, medication, refill_date, next_test_due"],
+            "Key Use Case": ["Time since last clinic visit tracking", "Visit frequency & follow-up scheduling", "High BP monitoring every 90 days", "BP medication refill & 120-day testing"],
+            "Row Count": ["125,000", "450,000", "89,000", "45,000"],
+            "Last Updated": ["2024-08-28", "2024-08-28", "2024-08-27", "2024-08-26"]
+        }
+        
+        df_tables = pd.DataFrame(sample_data)
+        st.dataframe(df_tables, use_container_width=True, hide_index=True)
+        
         st.markdown("""
-        #### ✅ What You Need Before Starting
-        
-        **Snowflake Access:**
-        - Admin access to your Snowflake account
-        - Permission to create new databases and manage data sharing
-        - Snowflake account in a supported region (most US and EU regions work)
-        
-        **Braze Access:**
-        - Admin access to your Braze dashboard  
-        - Data export features enabled in your Braze plan
-        - Snowflake integration feature activated
-        
-        **AFC Healthcare Requirements:**
-        - HIPAA compliance review completed
-        - Data handling policies in place
-        - Patient privacy protocols established
-        
         <div class="highlight-box">
-            <p><strong>💡 Need Help?</strong> Contact your Braze account manager or Snowflake support 
-            if you're unsure about any requirements.</p>
+            <p><strong>💡 Key AFC Use Cases:</strong> Track time since last clinic visit → Automate BP monitoring every 90 days → 
+            Manage prescription refills with 120-day testing reminders via lifecycle canvas campaigns.</p>
         </div>
         """, unsafe_allow_html=True)
-        
-        st.code("""
-        -- Verify your Snowflake account region
-        SELECT CURRENT_REGION() AS SNOWFLAKE_REGION;
-        
-        -- Check current user privileges
-        SHOW GRANTS TO USER CURRENT_USER();
-        """, language="sql")
     
-    # Step 2: Snowflake Environment
-    with st.expander("❄️ **Step 2: Snowflake Environment Configuration**"):
-        st.markdown("""
-        #### 🏗️ Environment Setup
-        
-        Configure your Snowflake environment to receive Braze data with proper resource allocation and security settings.
-        """)
-        
-        st.code("""
-        -- 1. Create dedicated warehouse for Braze data processing
-        CREATE WAREHOUSE AFC_BRAZE_WH WITH
-          WAREHOUSE_SIZE = 'SMALL'
-          AUTO_SUSPEND = 300
-          AUTO_RESUME = TRUE
-          INITIALLY_SUSPENDED = TRUE
-          COMMENT = 'Warehouse for AFC Braze data processing';
-        
-        -- 2. Create dedicated database for Braze data
-        CREATE DATABASE AFC_BRAZE_DATA
-          COMMENT = 'American Family Care - Braze patient engagement data';
-        
-        -- 3. Set default warehouse context
-        USE WAREHOUSE AFC_BRAZE_WH;
-        USE DATABASE AFC_BRAZE_DATA;
-        """, language="sql")
-        
-        st.warning("⚠️ **Security Note**: Ensure proper network policies and IP whitelisting are configured for HIPAA compliance.")
-    
-    # Step 3: Braze Data Share Configuration
-    with st.expander("🔗 **Step 3: Braze Data Share Configuration**"):
-        st.markdown("""
-        #### 📡 Configure Data Sharing in Braze
-        
-        Set up the data share from your Braze dashboard to your Snowflake account.
-        """)
+    # Step 2: Create Braze Sync
+    with st.expander("🔄 **Step 2: Create Import Sync to Braze**"):
+        st.markdown("#### 📥 Set Up Patient Data Import")
         
         st.markdown("""
-        **Simple Steps in Braze Dashboard:**
-        
-        1. **Find the Integration**: Go to **Technology Partners** → **Data Export**
-        2. **Choose Snowflake**: Click on the Snowflake option
-        3. **Enter Your Details**:
-           - Your Snowflake account ID (get this from your Snowflake admin)
-           - Your Snowflake region (like US-East-1)
-           - Share name: `AFC_BRAZE_SHARE` (we recommend this name)
-        4. **Pick What Data to Share**:
-           - Choose "Real-time" for live updates
-           - Select data types AFC needs (see below)
-           - Include last 90 days of historical data
+        **In your Braze Dashboard:**
+        1. Go to **Technology Partners** → **Snowflake**
+        2. Click **Create new import sync** 
+        3. Configure your import settings:
         """)
         
-        st.info("""
-        🏥 **AFC Healthcare Focus**: Prioritize these data types for patient engagement:
-        - User behaviors (app sessions, custom events)
-        - Message engagement (email opens, SMS delivery)
-        - Campaign performance data
-        - Push notification interactions
-        """)
+        # Configuration table focused on AFC use cases
+        config_data = {
+            "Setting": ["Sync Name", "Source Table", "External ID Field", "Email Field", "Update Type", "Frequency"],
+            "AFC Configuration": ["AFC Health Monitoring", "PUBLIC.PATIENTS", "patient_id", "email", "Upsert", "Every 12 hours"],
+            "Description": ["Health monitoring sync for BP & visits", "Patient table with visit & BP data", "Unique patient identifier", "Patient email for health reminders", "Create or update profiles", "Twice daily for health monitoring"]
+        }
         
-        st.code("""
-        -- Example: Expected share name format
-        -- Format: <ORGANIZATION>_<WORKSPACE>_<REGION>_BRAZE_SHARE
-        -- Example: AFC_PROD_US_EAST_1_BRAZE_SHARE
-        """, language="sql")
-    
-    # Step 4: Database & Schema Creation
-    with st.expander("🗃️ **Step 4: Database & Schema Creation**"):
+        df_config = pd.DataFrame(config_data)
+        st.dataframe(df_config, use_container_width=True, hide_index=True)
+        
         st.markdown("""
-        #### 🏗️ Create Database Structure
-        
-        Set up the database schema structure to organize Braze data for AFC's healthcare analytics.
-        """)
-        
-        st.code("""
-        -- 1. Create schemas for different data categories
-        CREATE SCHEMA AFC_BRAZE_DATA.PATIENT_ENGAGEMENT
-          COMMENT = 'Patient interaction and engagement data';
-        
-        CREATE SCHEMA AFC_BRAZE_DATA.CAMPAIGNS
-          COMMENT = 'Campaign and communication data';
-        
-        CREATE SCHEMA AFC_BRAZE_DATA.ANALYTICS
-          COMMENT = 'Processed analytics and aggregated views';
-        
-        CREATE SCHEMA AFC_BRAZE_DATA.COMPLIANCE
-          COMMENT = 'HIPAA compliance and audit data';
-        
-        -- 2. Create shared database from Braze share
-        CREATE DATABASE AFC_BRAZE_SHARED 
-        FROM SHARE <BRAZE_ACCOUNT>.AFC_BRAZE_SHARE
-        COMMENT = 'Shared Braze data from data share';
-        
-        -- 3. Grant usage on shared database
-        GRANT USAGE ON DATABASE AFC_BRAZE_SHARED TO ROLE AFC_BRAZE_ROLE;
-        """, language="sql")
-    
-    # Step 5: Access Control & Security
-    with st.expander("🔐 **Step 5: Access Control & Security Setup**"):
-        st.markdown("""
-        #### 🛡️ HIPAA-Compliant Access Control
-        
-        Configure role-based access control and security measures for patient data protection.
-        """)
-        
-        st.code("""
-        -- 1. Create dedicated roles for Braze data access
-        CREATE ROLE AFC_BRAZE_ADMIN
-          COMMENT = 'Administrative access to Braze data';
-        
-        CREATE ROLE AFC_BRAZE_ANALYST
-          COMMENT = 'Read-only access for data analysts';
-        
-        CREATE ROLE AFC_BRAZE_REPORTING
-          COMMENT = 'Limited access for reporting tools';
-        
-        -- 2. Grant warehouse usage
-        GRANT USAGE ON WAREHOUSE AFC_BRAZE_WH TO ROLE AFC_BRAZE_ADMIN;
-        GRANT USAGE ON WAREHOUSE AFC_BRAZE_WH TO ROLE AFC_BRAZE_ANALYST;
-        GRANT USAGE ON WAREHOUSE AFC_BRAZE_WH TO ROLE AFC_BRAZE_REPORTING;
-        
-        -- 3. Grant database and schema permissions
-        GRANT USAGE ON DATABASE AFC_BRAZE_DATA TO ROLE AFC_BRAZE_ADMIN;
-        GRANT USAGE ON DATABASE AFC_BRAZE_SHARED TO ROLE AFC_BRAZE_ADMIN;
-        
-        GRANT USAGE ON ALL SCHEMAS IN DATABASE AFC_BRAZE_DATA TO ROLE AFC_BRAZE_ADMIN;
-        GRANT SELECT ON ALL TABLES IN DATABASE AFC_BRAZE_SHARED TO ROLE AFC_BRAZE_ANALYST;
-        
-        -- 4. Create user assignments
-        GRANT ROLE AFC_BRAZE_ADMIN TO USER <AFC_DATA_ADMIN>;
-        GRANT ROLE AFC_BRAZE_ANALYST TO USER <AFC_DATA_ANALYST>;
-        """, language="sql")
-        
-        st.warning("""
-        🏥 **HIPAA Compliance Checklist:**
-        - [ ] Audit logging enabled
-        - [ ] Data encryption at rest verified
-        - [ ] Access controls implemented
-        - [ ] User activity monitoring configured
-        - [ ] Data retention policies defined
+        **Select Fields to Import for AFC Use Cases:**
+        - ✅ `patient_id` (External ID) 
+        - ✅ `email` (Email address)
+        - ✅ `phone` (Phone number for SMS reminders)
+        - ✅ `first_name`, `last_name` (Personalization)
+        - ✅ `last_clinic_visit` (Time since last visit tracking)
+        - ✅ `blood_pressure_status` (High BP monitoring)
+        - ✅ `next_bp_check_due` (90-day BP follow-up scheduling)
+        - ✅ `prescription_refill_due` (120-day testing reminders)
+        - ✅ `medication_list` (BP medication management)
         """)
     
-    # Step 6: Data Validation & Testing
-    with st.expander("✅ **Step 6: Data Validation & Testing**"):
-        st.markdown("""
-        #### 🧪 Validate Data Integration
+    # Step 3: Sync Status & Monitoring
+    with st.expander("📈 **Step 3: Monitor Import Sync Status**"):
+        st.markdown("#### 🔍 Track Your Data Sync Performance")
         
-        Test the data share connection and validate data quality for AFC's healthcare analytics.
+        # Sample sync status table focused on health monitoring
+        sync_data = {
+            "Sync Name": ["AFC Health Monitoring"] * 5,
+            "Status": ["Success", "Success", "Success", "Success", "Failed"],
+            "Rows Synced": ["47,394", "47,401", "46,884", "47,205", "0"],
+            "BP Patients Updated": ["8,234", "8,401", "8,156", "8,329", "0"],
+            "Overdue Visits Flagged": ["1,205", "1,189", "1,234", "1,276", "0"],
+            "Refill Reminders Queued": ["456", "489", "423", "467", "0"],
+            "Run Duration": ["37 minutes", "35 minutes", "42 minutes", "38 minutes", "2 minutes"]
+        }
+        
+        df_sync = pd.DataFrame(sync_data)
+        st.dataframe(df_sync, use_container_width=True, hide_index=True)
+        
+        st.markdown("""
+        <div class="highlight-box">
+            <p><strong>🩺 Health Monitoring Success:</strong> Tracking ~8.4K BP patients, identifying 1.2K overdue visits, 
+            and queueing 450+ prescription refill reminders every 12 hours!</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Step 4: Export Enhanced Data Back
+    with st.expander("📤 **Step 4: Export Enhanced Data to Snowflake**"):
+        st.markdown("#### 🔄 Get Patient Engagement Data Back")
+        
+        st.markdown("""
+        **What Braze Adds for AFC Health Monitoring:**
+        - 🩺 **BP Reminder Engagement**: Track who opens 90-day BP check reminders
+        - 💊 **Prescription Refill Response**: Monitor 120-day testing reminder effectiveness  
+        - 🏥 **Visit Scheduling**: Canvas journey performance for overdue clinic visits
+        - 📊 **Lifecycle Canvas Analytics**: Complete patient journey from reminder to action
         """)
         
-        st.code("""
-        -- 1. List available shares
-        SHOW SHARES;
+        # Benefits table focused on AFC use cases
+        benefit_data = {
+            "Data Type": ["BP Check Reminders", "Prescription Refill Alerts", "Overdue Visit Outreach", "Lifecycle Canvas Performance"],
+            "What You Get": ["90-day reminder open/click rates", "120-day testing reminder response", "Visit scheduling conversion rates", "End-to-end patient journey metrics"],
+            "AFC Use Case": ["Optimize BP monitoring cadence", "Improve medication compliance", "Reduce overdue visit gaps", "Perfect health reminder campaigns"],
+            "Sync Frequency": ["Real-time", "Real-time", "Daily", "Campaign completion"]
+        }
         
-        -- 2. Describe the Braze share
-        DESC SHARE <BRAZE_ACCOUNT>.AFC_BRAZE_SHARE;
-        
-        -- 3. List tables in shared database
-        SHOW TABLES IN DATABASE AFC_BRAZE_SHARED;
-        
-        -- 4. Test data access - Patient engagement events
-        SELECT 
-            COUNT(*) as total_events,
-            COUNT(DISTINCT user_id) as unique_patients,
-            MIN(TO_TIMESTAMP(time)) as earliest_event,
-            MAX(TO_TIMESTAMP(time)) as latest_event
-        FROM AFC_BRAZE_SHARED.<SCHEMA>.USERS_BEHAVIORS_CUSTOMEVENT_SHARED
-        WHERE DATE(TO_TIMESTAMP(time)) >= CURRENT_DATE - 7;
-        
-        -- 5. Validate message delivery data
-        SELECT 
-            DATE(TO_TIMESTAMP(time)) as message_date,
-            COUNT(*) as messages_sent,
-            COUNT(DISTINCT user_id) as patients_reached
-        FROM AFC_BRAZE_SHARED.<SCHEMA>.USERS_MESSAGES_SMS_SEND_SHARED
-        WHERE DATE(TO_TIMESTAMP(time)) >= CURRENT_DATE - 30
-        GROUP BY message_date
-        ORDER BY message_date DESC;
-        """, language="sql")
+        df_benefits = pd.DataFrame(benefit_data)
+        st.dataframe(df_benefits, use_container_width=True, hide_index=True)
         
         st.success("""
-        ✅ **Validation Success Criteria:**
-        - Data is flowing from Braze to Snowflake
-        - All expected tables are accessible
-        - Patient engagement events are captured
-        - Message delivery data is complete
-        - Data freshness meets requirements (< 24 hours)
+        ✅ **READ ONLY Access** - Braze data flows to Snowflake automatically  
+        ✅ **Only updating changes** - No duplicate data, just new insights  
+        ✅ **No ETL tools required** - Direct integration with your warehouse  
         """)
     
-    # Healthcare-specific views
-    st.markdown("### 🏥 Healthcare Analytics Views")
+    # Step 5: View Your Enhanced Data
+    st.markdown("### 📊 Your Enhanced Patient Data")
     
-    st.markdown("""
-    <div class="integration-card">
-        <h4>🔍 Create AFC-Specific Analytics Views</h4>
-        <p>Pre-built views for common healthcare analytics use cases:</p>
-    </div>
-    """, unsafe_allow_html=True)
+    # Sample enhanced data view focused on AFC use cases
+    enhanced_data = {
+        "Patient ID": ["P001", "P002", "P003", "P004", "P005"],
+        "Name": ["John Smith", "Sarah Johnson", "Mike Brown", "Lisa Davis", "Tom Wilson"],
+        "Days Since Last Visit": ["45", "120", "8", "90", "180"],
+        "BP Status": ["High - Due for Check", "Normal", "High - Overdue", "High - Monitored", "Normal"],
+        "Next BP Check Due": ["2024-09-15", "2024-12-01", "2024-08-20", "2024-10-01", "2025-01-15"],
+        "Prescription Refill": ["Due in 30 days", "Not applicable", "Overdue", "Due in 60 days", "Not applicable"],
+        "Lifecycle Canvas Status": ["BP Reminder Sent", "Visit Reminder Sent", "Urgent Follow-up", "Monitoring Active", "Wellness Check"],
+        "Last Engagement": ["Opened SMS", "No response", "Clicked email", "Scheduled visit", "Opened email"]
+    }
     
-    st.code("""
-    -- Patient Engagement Summary View
-    CREATE VIEW AFC_BRAZE_DATA.ANALYTICS.PATIENT_ENGAGEMENT_SUMMARY AS
-    SELECT 
-        DATE(TO_TIMESTAMP(time)) as engagement_date,
-        COUNT(DISTINCT user_id) as active_patients,
-        COUNT(*) as total_interactions,
-        COUNT(CASE WHEN name = 'appointment_booked' THEN 1 END) as appointments_booked,
-        COUNT(CASE WHEN name = 'health_survey_completed' THEN 1 END) as surveys_completed,
-        COUNT(CASE WHEN name = 'symptom_checker_used' THEN 1 END) as symptom_checks
-    FROM AFC_BRAZE_SHARED.<SCHEMA>.USERS_BEHAVIORS_CUSTOMEVENT_SHARED
-    WHERE DATE(TO_TIMESTAMP(time)) >= CURRENT_DATE - 90
-    GROUP BY engagement_date;
+    df_enhanced = pd.DataFrame(enhanced_data)
+    st.dataframe(df_enhanced, use_container_width=True, hide_index=True)
     
-    -- Appointment Reminder Effectiveness View  
-    CREATE VIEW AFC_BRAZE_DATA.ANALYTICS.APPOINTMENT_REMINDERS AS
-    SELECT 
-        s.campaign_id,
-        COUNT(DISTINCT s.user_id) as reminders_sent,
-        COUNT(DISTINCT o.user_id) as reminders_opened,
-        ROUND(COUNT(DISTINCT o.user_id) / COUNT(DISTINCT s.user_id) * 100, 2) as open_rate_pct
-    FROM AFC_BRAZE_SHARED.<SCHEMA>.USERS_MESSAGES_SMS_SEND_SHARED s
-    LEFT JOIN AFC_BRAZE_SHARED.<SCHEMA>.USERS_MESSAGES_EMAIL_OPEN_SHARED o 
-        ON s.user_id = o.user_id 
-        AND s.campaign_id = o.campaign_id
-    WHERE DATE(TO_TIMESTAMP(s.time)) >= CURRENT_DATE - 30
-    GROUP BY s.campaign_id;
-    """, language="sql")
-    
-    # Next steps
-    st.markdown("### 🚀 Next Steps for AFC")
-    
-    next_steps_cols = st.columns(3)
-    
-    with next_steps_cols[0]:
-        st.markdown("""
-        **📊 Analytics Setup**
-        - Configure BI tools (Tableau, Looker)
-        - Create patient journey dashboards
-        - Set up automated reporting
-        """)
-    
-    with next_steps_cols[1]:
-        st.markdown("""
-        **🔄 Data Pipeline**
-        - Schedule data quality checks
-        - Implement data transformation workflows
-        - Set up monitoring and alerting
-        """)
-    
-    with next_steps_cols[2]:
-        st.markdown("""
-        **🎯 Use Case Implementation**
-        - Patient engagement scoring
-        - Appointment optimization models
-        - Care gap identification algorithms
-        """)
+
 
 elif page == "Technical Documentation":
     st.markdown("## 📚 Technical Documentation")
@@ -891,35 +741,35 @@ elif page == "Use Cases":
     
     st.markdown("""
     <div class="integration-card">
-        <h3>🏥 Patient Engagement & Care Optimization</h3>
-        <p>Discover how AFC leverages Braze + Snowflake for superior patient care:</p>
+        <h3>🏥 Health Monitoring & Care Optimization</h3>
+        <p>Discover how AFC uses Braze + Snowflake for critical health monitoring scenarios:</p>
     </div>
     """, unsafe_allow_html=True)
     
     use_cases = [
         {
-            "title": "📱 Appointment Reminder Optimization",
-            "description": "Analyze SMS and email delivery rates to optimize appointment reminder timing and reduce no-shows.",
-            "metrics": ["40% reduction in no-shows", "95% message delivery rate", "Patient satisfaction +25%"],
-            "tables": ["USERS_MESSAGES_SMS_SEND_SHARED", "USERS_MESSAGES_EMAIL_DELIVERY_SHARED"]
+            "title": "🩺 High Blood Pressure Monitoring (90-Day Cycle)",
+            "description": "Automatically track patients with high BP and send personalized reminders every 90 days for check-ups, monitoring engagement and optimizing timing.",
+            "metrics": ["90-day reminder compliance tracking", "BP check appointment booking rates", "High-risk patient engagement analysis"],
+            "tables": ["USERS_MESSAGES_SMS_SEND_SHARED", "USERS_BEHAVIORS_CUSTOMEVENT_SHARED", "USERS_MESSAGES_EMAIL_OPEN_SHARED"]
         },
         {
-            "title": "🩺 Health Education Campaigns", 
-            "description": "Track engagement with seasonal health tips, vaccination reminders, and preventive care information.",
-            "metrics": ["60% open rate on health emails", "Vaccination uptake +30%", "Preventive visits +20%"],
-            "tables": ["USERS_MESSAGES_EMAIL_OPEN_SHARED", "USERS_BEHAVIORS_CUSTOMEVENT_SHARED"]
+            "title": "🏥 Time Since Last Clinic Visit Tracking", 
+            "description": "Monitor patient visit frequency using Snowflake data, trigger outreach campaigns for overdue patients, and track response effectiveness.",
+            "metrics": ["Days since last visit analysis", "Overdue patient identification", "Visit scheduling conversion rates"],
+            "tables": ["CLINIC_VISITS (Snowflake)", "USERS_MESSAGES_EMAIL_SEND_SHARED", "USERS_BEHAVIORS_CUSTOMEVENT_SHARED"]
         },
         {
-            "title": "📊 Patient Journey Analytics",
-            "description": "Map complete patient interactions from first app session through ongoing care relationships.",
-            "metrics": ["Patient lifetime value insight", "Care gap identification", "Personalized care paths"],
-            "tables": ["USERS_BEHAVIORS_APP_FIRSTSESSION_SHARED", "USERS_BEHAVIORS_CUSTOMEVENT_SHARED"]
+            "title": "💊 Prescription Refill with 120-Day Testing",
+            "description": "Manage blood pressure medication refills with automated 120-day testing reminders through Braze lifecycle canvas campaigns.",
+            "metrics": ["Prescription refill compliance", "120-day testing reminder effectiveness", "Medication adherence tracking"],
+            "tables": ["PRESCRIPTION_REFILLS (Snowflake)", "USERS_CANVAS_ENTRY_SHARED", "USERS_MESSAGES_SMS_SEND_SHARED"]
         },
         {
-            "title": "🚨 Urgent Care Visit Optimization",
-            "description": "Analyze peak urgent care demand patterns and optimize staffing and patient flow.",
-            "metrics": ["Wait time reduction 25%", "Staff efficiency +15%", "Patient throughput +20%"],
-            "tables": ["USERS_BEHAVIORS_CUSTOMEVENT_SHARED", "USERS_MESSAGES_PUSH_NOTIFICATION_SEND_SHARED"]
+            "title": "🔄 Lifecycle Canvas Performance Analysis",
+            "description": "Analyze end-to-end patient journey performance across all three health monitoring use cases using Canvas analytics.",
+            "metrics": ["Canvas completion rates", "Patient journey optimization", "Health outcome improvements"],
+            "tables": ["USERS_CANVAS_ENTRY_SHARED", "USERS_CANVAS_EXIT_SHARED", "USERS_BEHAVIORS_CUSTOMEVENT_SHARED"]
         }
     ]
     
